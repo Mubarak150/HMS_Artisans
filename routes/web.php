@@ -72,9 +72,15 @@ Route::post('resetpassword', [LoginController::class, 'updatepassword'])->name('
 Route::resource('doctors', DoctorController::class);
 Route::resource('patients', PatientController::class);
 
-Route::get('/patients/{patient}/histories', [PatientHistoryController::class, 'index'])->name('patients.histories.index');
-Route::get('/patients/{patient}/histories/{history}', [PatientHistoryController::class, 'show'])->name('patients.histories.show');
-Route::get('/patients/{patient}/histories/create', [PatientHistoryController::class, 'create'])->name('patients.histories.create');
+Route::get('/patients/{patient}/histories', [PatientHistoryController::class, 'index'])
+    ->name('patients.histories.index');
+
+Route::get('/patients/{patient}/histories/create', [PatientHistoryController::class, 'create'])
+    ->name('patients.histories.create');
+
+Route::get('/patients/{patient}/histories/{history}', [PatientHistoryController::class, 'show'])
+    ->name('patients.histories.show');
+
 Route::post('/patients/{patient}/histories/create', [PatientHistoryController::class, 'store'])->name('patients.histories.store');
 Route::get('/patients/{patient}/histories/{history}/edit', [PatientHistoryController::class, 'edit'])->name('patients.histories.edit');
 Route::put('/patients/{patient}/histories/{history}', [PatientHistoryController::class, 'update'])->name('patients.histories.update');

@@ -11,15 +11,17 @@ class PatientHistoryController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index($patientId)
-    {
-        // Fetch all histories for this specific patient
-        $histories = PatientHistory::where('patient_id', $patientId)
-            ->with('patient') // eager load patient details
-            ->get();
+   public function index($patientId)
+{
+    $patient = User::findOrFail($patientId); // or Patient::findOrFail($patientId)
+    
+    $histories = PatientHistory::where('patient_id', $patientId)
+        ->with('patient')
+        ->get();
 
-        return view('patient.histories.index', compact('histories'));
-    }
+    return view('patient.histories.index', compact('patient', 'histories')); 
+}
+
 
     /**
      * Show the form for creating a new resource.
